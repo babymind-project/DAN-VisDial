@@ -1,8 +1,11 @@
 DAN-VisDial
 ========================================================================
 
-PyTorch implementation for the EMNLP'19 [Dual Attention Networks for Visual Reference Resolution in Visual Dialog][1]. <br>
-For the visual dialog v1.0 dataset, our single model achieved state-of-the-art performance on **NDCG, MRR, and R@1**.   
+Pytorch Implementation for the paper:
+
+**[Dual Attention Networks for Visual Reference Resolution in Visual Dialog][1]** <br>
+[Gi-Cheon Kang](https://gicheonkang.com), [Jaeseo Lim](https://jaeseolim.github.io), and [Byoung-Tak Zhang](https://bi.snu.ac.kr/~btzhang/) <br>
+In EMNLP 2019  
 
 <!--![Overview of Dual Attention Networks](dan_overview.jpg)-->
 <img src="dan_overview.jpg" width="90%" align="middle">
@@ -13,6 +16,7 @@ If you use this code in your published research, please consider citing:
   title={Dual Attention Networks for Visual Reference Resolution in Visual Dialog},
   author={Kang, Gi-Cheon and Lim, Jaeseo and Zhang, Byoung-Tak},
   booktitle={Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing},
+  pages = {2024--2033},
   year={2019}
 }
 ```
@@ -22,7 +26,7 @@ Setup and Dependencies
 This starter code is implemented using **PyTorch v0.3.1** with **CUDA 8 and CuDNN 7**. <br>
 It is recommended to set up this source code using Anaconda or Miniconda. <br>
 
-1. Install Anaconda or Miniconda distribution based on Python 3.6+ from their [downloads' site][2].
+1. Install Anaconda or Miniconda distribution based on **Python 3.6+** from their [downloads' site][2].
 2. Clone this repository and create an environment:
 
 ```sh
@@ -81,15 +85,30 @@ python evaluate.py -load_path /path/to/.pth -split val
 ```
 Validation scores can be checked in offline setting. But if you want to check the `test split` score, you have to submit a json file to [online evaluation server][10]. You can make json format with `-save_ranks=True` option.
 
-Results
+Pre-trained model & Results
 --------
+We provide the [pre-trained model][11] reported as the best single model in the paper. <br>
+To reproduce the results reported in the paper, please run the command below and submit the json file to [online evaluation server][10].
+```sh
+python evaluate.py -load_path /path/to/dan_disc_epoch_12.pth -split test -use_gt False -save_ranks True
+```
+
 Performance on `v1.0 test-std` (trained on `v1.0` train):
 
   Model  |  NDCG   |  MRR   |  R@1  | R@5  |  R@10   |  Mean  |
  ------- | ------ | ------ | ------ | ------ | ------ | ------ |
 DAN | 0.5759 | 0.6320 | 49.63 |  79.75| 89.35 | 4.30 |
 
-[1]: https://arxiv.org/abs/1902.09368
+
+License
+--------
+MIT License
+
+Acknowledgements
+--------
+This work was partly supported by the Korea government (2015-0-00310-SW.StarLab, 2017-0-01772-VTT, 2018-0-00622-RMI, 2019-0-01367-BabyMind, 10060086-RISF, P0006720-GENKO), and the ICT at Seoul National University.
+
+[1]: https://www.aclweb.org/anthology/D19-1209
 [2]: https://conda.io/docs/user-guide/install/download.html
 [3]: https://drive.google.com/file/d/1NYlSSikwEAqpJDsNGqOxgc0ZOkpQtom9/view?usp=sharing
 [4]: https://drive.google.com/file/d/1QSi0Lr4XKdQ2LdoS1taS6P9IBVAKRntF/view?usp=sharing
@@ -99,3 +118,4 @@ DAN | 0.5759 | 0.6320 | 49.63 |  79.75| 89.35 | 4.30 |
 [8]: https://drive.google.com/file/d/1_32kGhd6wKzQLqfmqJzIHubfZwe9nhFy/view?usp=sharing
 [9]: http://nlp.stanford.edu/data/glove.6B.zip 
 [10]: https://evalai.cloudcv.org/web/challenges/challenge-page/161/overview
+[11]: https://drive.google.com/file/d/1lI8vldgfr3LLSDvJ5j1rf1vwDCnxzXbU/view?usp=sharing
